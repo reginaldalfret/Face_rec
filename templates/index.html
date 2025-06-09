@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Facial Emotion Movie Recommender</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Make sure Chart.js is loaded from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎭 Facial Emotion Movie Recommender 🎬</h1>
+            <p>We'll analyze your facial expression and recommend movies based on your mood!</p>
+        </header>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="webcam">Use Webcam</button>
+            <button class="tab-btn" data-tab="upload">Upload Image</button>
+        </div>
+
+        <div class="tab-content active" id="webcam-tab">
+            <div class="webcam-container">
+                <video id="webcam" autoplay playsinline></video>
+                <canvas id="canvas" style="display: none;"></canvas>
+                <div class="controls">
+                    <button id="capture-btn" class="btn primary">Capture Image</button>
+                    <button id="retry-btn" class="btn secondary" style="display: none;">Try Again</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="upload-tab">
+            <div class="upload-container">
+                <form id="upload-form">
+                    <div class="file-input-container">
+                        <input type="file" id="file-input" accept="image/*">
+                        <label for="file-input" class="file-label">
+                            <span class="file-icon">📁</span>
+                            <span class="file-text">Choose an image</span>
+                        </label>
+                    </div>
+                    <div id="file-name"></div>
+                    <button type="submit" class="btn primary">Analyze Image</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="loading" style="display: none;">
+            <div class="spinner"></div>
+            <p>Analyzing your expression and finding perfect movies...</p>
+        </div>
+
+        <div id="results" style="display: none;">
+            <div class="results-container">
+                <div class="emotions-container">
+                    <h2>Detected Emotions</h2>
+                    <!-- Make sure this is a canvas element -->
+                    <div class="chart-container">
+                        <canvas id="emotions-chart"></canvas>
+                    </div>
+                    <div id="emotions-list"></div>
+                </div>
+                
+                <div class="recommendations-container">
+                    <h2>Movie Recommendations</h2>
+                    <div id="recommendations"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="error-message" style="display: none;">
+            <p>Oops! Something went wrong. Please try again.</p>
+            <p id="error-details"></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>Powered by TMDB API and OpenCV</p>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

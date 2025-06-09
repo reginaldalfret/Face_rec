@@ -1,0 +1,14 @@
+venv/
+__pycache__/
+*.so
+*.mp4
+*.zip
+*.h5
+*.pt
+venv/
+__pycache__/
+*.so
+*.mp4
+*.zip
+*.h5
+*.pt
